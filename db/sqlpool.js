@@ -122,5 +122,47 @@ var sqlUtil = {
           })
         })
     },
+    /**
+        'and' : [{'key':'book_name', 'opts':'=', 'value' : '"nodejs"'}, {'key':'author', 'opts':'=', 'value' : '"danhuang"'}],
+        'or' : [{'key':'book_id', 'opts':'<', 'value' : 10}]
+        };
+        var fieldsArr = ['book_id','book_name', 'author', 'time'];//查询结果中显示的字段
+        var orderByJson = {'key':'time', 'type':'desc'};//按照时间降序排序
+        var limitArr = [0, 3]; //查询结果的前三个
+        baseModel.find(tableName, whereJson, orderByJson, limitArr, fieldsArr, function(ret){
+            console.log(JSON.stringify(ret));
+        });
+    **/
+    findOptionSql:function(tableName, whereJson, orderByJson, limitArr, fieldsArr, callback){
+        var andWhere   = whereJson['and']
+            , orWhere    = whereJson['or']
+            , andArr = []
+            , orArr  = [];
+        /* 将数组转换为where and条件array */
+        for(var i=0; i<andWhere.length; i++){
+            andArr.push(andWhere[i]['key'] + andWhere[i]['opts'] + andWhere[i]['value']);
+        }
+        /* 将数组转换为where or条件array */
+        for(var i=0; i<orWhere.length; i++){
+            orArr.push(orWhere[i]['key'] + orWhere[i]['opts'] +orWhere[i]['value']);
+        }
+        /* 判断条件是否存在，如果存在则转换相应的添加语句 */
+        var filedsStr = fieldsArr.length>0 ? fieldsArr.join(',') : '*'
+            , andStr    = andArr.length>0    ? andArr.join(' and ') : ''
+            , orStr     = orArr.length>0     ? ' or '+orArr.join(' or ') : ''
+            , limitStr  = limitArr.length>0  ? ' limit ' + limitArr.join(',') : ''
+            , orderStr  = orderByJson ? ' order by ' + orderByJson['key'] + ' ' + orderByJson['type'] : '';
+        /* 执行mysql语句 */
+        dbClient.query('SELECT ' + filedsStr + ' FROM ' + tableName + ' where ' + andStr + orStr + orderStr + limitStr,
+            function(error, results) {
+                if (error) {
+                    console.log('GetData Error: ' + error.message);
+                    dbClient.end();
+                    callback(false);
+                } else {
+                    callback(results);
+                }
+            });
+    }
 }
 module.exports = sqlUtil ;

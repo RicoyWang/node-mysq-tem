@@ -17,14 +17,14 @@ router.get('/login',function(req,res,next){
     rowData.id = params.id;
     sqlUtil.checkSql('user',rowData,function(re){
         var user = {};
-        console.log(re)
-        if(re){
-            user.id = re.id;
-            user.name = re.username;
-            user.pwd = re.pwd;
-        }
-        var response = {status:203,data:user};
-        res.render('login', { title: re.username });
+        // console.log(re)
+        // if(re){
+        //     user.id = re.id;
+        //     user.name = re.username;
+        //     user.pwd = re.pwd;
+        // }
+        var response = {status:203,data:"user"};
+        res.send(response);
     })
     
 
