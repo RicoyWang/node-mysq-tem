@@ -1,0 +1,33 @@
+{
+    
+    "restartable": "rs",
+    "verbose": false,
+    "env": {
+        "NODE_ENV": "development",
+        
+        "PORT": "3000" 
+    },
+    
+    "execMap": {
+    
+        "": "node --inspect", 
+       
+        "js": "node --inspect"
+    },
+    
+    "watch": [
+        "app/",
+        "bin/",
+        "routes/",
+        "views/",
+        "app.js"
+    ],
+    
+    "ignore": [
+        ".git",
+        ".idea",
+        "node_modules"
+    ],
+    
+    "ext": "js jade"
+}
