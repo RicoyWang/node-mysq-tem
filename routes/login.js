@@ -9,25 +9,31 @@ var sqlUtil = require('../db/sqlpool.js');
 //   res.send('respond with a resource');
 // });
 
+var express = require('express');
+var router = express.Router();
 
-router.get('/login',function(req,res,next){
-    var user = {};
-    var params = URL.parse(req.url,true).query;
-    var rowData = {};
-    rowData.id = params.id;
-    sqlUtil.checkSql('user',rowData,function(re){
-        var user = {};
-        // console.log(re)
-        // if(re){
-        //     user.id = re.id;
-        //     user.name = re.username;
-        //     user.pwd = re.pwd;
-        // }
-        var response = {status:203,data:"user"};
-        res.send(response);
+router.route('/')
+    // 顯示登入表單 (GET http://localhost:3000/login)
+    .get(function(req,res){
+        console.log(res)
+        res.send('this is the login form'); 
     })
+    // 處理登入表單 (POST http://localhost:3000/login)
+    .post(function(req,res,next){
     
+        // var params = URL.parse(req.url,true).query;
+        var rowData = {};
+        rowData.username = req.body.name;
+        sqlUtil.checkSql('user',rowData,function(re){
+            var data ={code:''};
+            console.log(re)
+            if(re && re.pwd == req.body.pwd ){
+                res.status(200).json({ status:200,msg: {code:200,ms:'ds'}});
+            }else{
+                res.redirect('/404');
+            }
+            
+        })
+    })
 
-    
-})
 module.exports = router;
