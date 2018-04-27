@@ -4,12 +4,14 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var proxy = require('express-http-proxy'); 
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var login = require('./routes/login');
+var robot = require('./routes/robot');
 var error = require('./routes/error');
-var post = require('./routes/post');
+// var post = require('./routes/post');
 
 var app = express();
 
@@ -24,17 +26,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+//Cors 开放跨域
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
+app.use('http://127.0.0.1:3000/', proxy('www.baidu.com'));
 app.use('/', index);
 app.use('/404', error);
 app.use('/login',login);
 app.use('/users', users);
+app.use('/robot', robot);
 
 
 // catch 404 and forward to error handler

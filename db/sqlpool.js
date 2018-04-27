@@ -85,7 +85,7 @@ var sqlUtil = {
           }
           connection.query( 'UPDATE ' + tableName + ' SET ? WHERE ?', [rowInfo, idJson],function(err,result){
             connection.release();
-            
+            console.log(result)
             if(err){
               console.log(err);
               return;
