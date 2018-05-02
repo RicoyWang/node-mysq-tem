@@ -3,18 +3,20 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "pm2": "pm2 start ./bin/www --watch ;pm2 log"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
-    "express": "~4.15.5",
+    "express": "^4.15.5",
     "express-http-proxy": "^1.1.0",
     "jade": "~1.11.0",
     "morgan": "~1.9.0",
     "mysql": "^2.15.0",
-    "sequelize": "^4.37.6",
+    "mysql2": "^1.5.3",
+    "sequelize": "^v4.0.0",
     "serve-favicon": "~2.4.5",
     "wechat": "^2.1.0"
   },

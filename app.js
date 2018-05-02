@@ -11,6 +11,7 @@ var users = require('./routes/users');
 var login = require('./routes/login');
 var robot = require('./routes/robot');
 var error = require('./routes/error');
+var fanli = require('./routes/fanli');
 // var post = require('./routes/post');
 
 var app = express();
@@ -34,13 +35,17 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
-
+process.on('uncaughtException', function(err) {
+  console.log('Caught exception: ' + err);
+  throw err;
+});
 app.use('http://127.0.0.1:3000/', proxy('www.baidu.com'));
 app.use('/', index);
 app.use('/404', error);
 app.use('/login', login);
 app.use('/users', users);
 app.use('/robot', robot);
+app.use('/fanli', fanli);
 
 
 // catch 404 and forward to error handler
