@@ -18,6 +18,7 @@
     "mysql2": "^1.5.3",
     "sequelize": "^v4.0.0",
     "serve-favicon": "~2.4.5",
+    "socket.io": "^2.1.0",
     "wechat": "^2.1.0"
   },
   "devDependencies": {}

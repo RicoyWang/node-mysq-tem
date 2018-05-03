@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>客服聊天室</title>
+	</head>
+	<body>
+        <button id="sendBtn">sendBtn</button>
+        <script src="./javascripts/socket.js"></script>
+		<script>
+			var socket=io.connect('http://127.0.0.1:3000/')//与服务器进行连接
+            var button=document.getElementById('sendBtn');
+            button.onclick=function(){
+                socket.emit('foo', 'hello');//发送一个名为foo的事件，并且传递一个字符串数据‘hello’
+            }
+		</script>
+	</body>
+	
+</html>

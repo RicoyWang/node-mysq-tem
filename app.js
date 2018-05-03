@@ -6,13 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var proxy = require('express-http-proxy');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-var login = require('./routes/login');
-var robot = require('./routes/robot');
-var error = require('./routes/error');
-var fanli = require('./routes/fanli');
-// var post = require('./routes/post');
+
+var {users,login,robot,fanli,error,locationfile} = require('./routes/index');
 
 var app = express();
 
@@ -32,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Cors 开放跨域
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Credentials", "true");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
@@ -40,13 +36,12 @@ app.use(function (req, res, next) {
 //   throw err;
 // });
 app.use('http://127.0.0.1:3000/', proxy('www.baidu.com'));
-app.use('/', index);
 app.use('/404', error);
 app.use('/login', login);
-console.log('********************************');
 app.use('/users', users);
 app.use('/robot', robot);
 app.use('/fanli', fanli);
+app.use('/locationfile', locationfile);
 
 
 // catch 404 and forward to error handler
@@ -59,6 +54,7 @@ app.use(function (req, res, next) {
 // error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
+  console.log('dsa')
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
