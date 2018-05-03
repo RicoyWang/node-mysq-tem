@@ -7,10 +7,13 @@ var ShoppingGuideTicketSendModel = sequelize.define('ShoppingGuideTicketSends', 
         type: Sequelize.STRING
     },
     //是否默认
-    wechat_name: {
+    product_id: {
         type: Sequelize.STRING
     },
-    context: {
+    reply_uer_id: {
+        type: Sequelize.TEXT
+    },
+    Pid:{
         type: Sequelize.TEXT
     },
     //创建时间
@@ -23,16 +26,6 @@ var ShoppingGuideTicketSendModel = sequelize.define('ShoppingGuideTicketSends', 
 
 var ShoppingGuideTicketSend = ShoppingGuideTicketSendModel.sync({force: false});
 
-// 发表新文章
-ShoppingGuideTicketSendAPI.newPost = function(up_id, down_id) {
-    return ShoppingGuideTicketSend.then(function() {
-        ShoppingGuideTicketSendModel.create({
-            taobao_account: taobao_account,
-            promotion_name:promotion_name,
-            create_at: Date.now()
-        });
-    });
-};
 //创建
 ShoppingGuideTicketSendAPI.NewLever =function(up_id, down_id){
     console.log(ShoppingGuideTicketSend)

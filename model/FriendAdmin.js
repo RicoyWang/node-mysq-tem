@@ -23,16 +23,6 @@ var FriendAdminModel = sequelize.define('FriendAdmins', {
 
 var FriendAdmin = FriendAdminModel.sync({force: false});
 
-// 发表新文章
-FriendAdminAPI.newPost = function(up_id, down_id) {
-    return FriendAdmin.then(function() {
-        FriendAdminModel.create({
-            taobao_account: taobao_account,
-            promotion_name:promotion_name,
-            create_at: Date.now()
-        });
-    });
-};
 //创建
 FriendAdminAPI.NewLever =function(up_id, down_id){
     console.log(FriendAdmin)

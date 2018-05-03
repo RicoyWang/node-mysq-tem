@@ -20,16 +20,7 @@ var Post = sequelize.define('post', {
 
 var post = Post.sync();
 
-// 发表新文章
-exports.newPost = function(title, content) {
-    return post.then(function() {
-        Post.create({
-            title: title,
-            content: content,
-            create_at: Date.now()
-        });
-    });
-};
+
 
 // 查找所以文章
 exports.findAllPosts = function() {

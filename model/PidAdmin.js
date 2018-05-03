@@ -40,16 +40,6 @@ var PidAdminModel = sequelize.define('PidAdmins', {
 
 var PidAdmin = PidAdminModel.sync({force: false});
 
-// 发表新文章
-PidAdminAPI.newPost = function(taobao_account, promotion_name) {
-    return PidAdmin.then(function() {
-        PidAdminModel.create({
-            taobao_account: taobao_account,
-            promotion_name:promotion_name,
-            create_at: Date.now()
-        });
-    });
-};
 //创建
 PidAdminAPI.NewPID =function(taobao_account, promotion_name){
     console.log(PidAdmin)
@@ -65,8 +55,8 @@ PidAdminAPI.findAllPosts = function() {
 };
 
 // 通过 ID 查找文章
-PidAdminAPI.findById = function(id) {
-    return PidAdmin.findById(id);
+PidAdminAPI.findByAccount = function(taobao_account) {
+    return PidAdminModel.findOne({ where: { taobao_account: taobao_account } });
 };
 
 module.exports = PidAdminAPI

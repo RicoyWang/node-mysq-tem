@@ -2,19 +2,19 @@ var express = require('express');
 var router  = express.Router();
 var URL     = require('url');
 var router = require('express').Router();
-var LeverAdminAPI = require('../model/LeverAdmin.js')
+var PidAdminAPI = require('../model/PidAdmin.js')
  
 router.route('/')
     // 顯示登入表單 (GET http://localhost:3000/login)
     .get(function(req,res){
         console.log(res)
-        LeverAdminAPI.NewLever('121', 'afda').then(function() {
-            // 通过 ID 查找文章
-            return LeverAdminAPI.findById(1);
+        PidAdminAPI.NewPID('posttitle', 'postcontent').then(function() {
+            return PidAdminAPI.findByAccount('posttitle');
         }).then(function(p) {
             console.log('********************************');
-            console.log('post title:', p.title);
-            console.log('post content:', p.content);
+            console.log(p)
+            console.log('post title:', p[0].title);
+            console.log('post content:', p[0].content);
         }).catch(function(er){
             console.log('er')
         });

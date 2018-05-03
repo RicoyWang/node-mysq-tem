@@ -3,11 +3,11 @@ var sequelize = require('../db/sequelizeDB/sequelizeConfig.js');
 var LeverAdminAPI ={}
 var LeverAdminModel = sequelize.define('LeverAdmins', {
     //是否屏蔽
-    up_id: {
+    up_user_id: {
         type: Sequelize.STRING
     },
     //是否默认
-    down_id: {
+    down_user_id: {
         type: Sequelize.STRING
     },
     //创建时间
@@ -46,7 +46,8 @@ LeverAdminAPI.findAllPosts = function() {
 
 // 通过 ID 查找文章
 LeverAdminAPI.findById = function(id) {
-    return LeverAdminModel.findById(id);
+    console.log(id)
+    return LeverAdminModel.findById({ where: { up_user_id: id } });
 };
 
 module.exports = LeverAdminAPI

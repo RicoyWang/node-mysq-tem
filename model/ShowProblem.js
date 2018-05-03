@@ -23,16 +23,7 @@ var ShowProblemModel = sequelize.define('ShowProblems', {
 
 var ShowProblem = ShowProblemModel.sync({force: false});
 
-// 发表新文章
-ShowProblemAPI.newPost = function(up_id, down_id) {
-    return ShowProblem.then(function() {
-        ShowProblemModel.create({
-            taobao_account: taobao_account,
-            promotion_name:promotion_name,
-            create_at: Date.now()
-        });
-    });
-};
+
 //创建
 ShowProblemAPI.NewLever =function(up_id, down_id){
     console.log(ShowProblem)
