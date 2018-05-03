@@ -2,18 +2,12 @@ var Sequelize = require('sequelize');
 var sequelize = require('../db/sequelizeDB/sequelizeConfig.js');
 var LeverAdminAPI ={}
 var LeverAdminModel = sequelize.define('LeverAdmins', {
-    //是否屏蔽
     up_user_id: {
         type: Sequelize.STRING
     },
-    //是否默认
     down_user_id: {
         type: Sequelize.STRING
     },
-    //创建时间
-    create_at: {
-        type: Sequelize.DATE
-    }
 }, {
     freezeTableName: false
 });
@@ -32,19 +26,18 @@ LeverAdminAPI.newPost = function(up_id, down_id) {
 };
 //创建
 LeverAdminAPI.NewLever =function(up_id, down_id){
-    console.log(LeverAdmin)
     return LeverAdminModel.create({
         up_id: up_id,
         down_id:down_id,
         create_at: Date.now()
     })
 }
-// 查找所以文章
+// 查找所以
 LeverAdminAPI.findAllPosts = function() {
     return LeverAdminModel.findAll();
 };
 
-// 通过 ID 查找文章
+// 通过 ID 查找
 LeverAdminAPI.findById = function(id) {
     console.log(id)
     return LeverAdminModel.findById({ where: { up_user_id: id } });

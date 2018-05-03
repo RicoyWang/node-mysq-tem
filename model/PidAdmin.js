@@ -30,10 +30,6 @@ var PidAdminModel = sequelize.define('PidAdmins', {
     is_default: {
         type: Sequelize.STRING
     },
-    //创建时间
-    create_at: {
-        type: Sequelize.DATE
-    }
 }, {
     freezeTableName: false
 });
@@ -55,6 +51,10 @@ PidAdminAPI.findAllPosts = function() {
 };
 
 // 通过 ID 查找文章
+PidAdminAPI.findById = function(id) {
+    return PidAdminModel.findOne({ where: { id: id } });
+};
+//淘宝账号
 PidAdminAPI.findByAccount = function(taobao_account) {
     return PidAdminModel.findOne({ where: { taobao_account: taobao_account } });
 };

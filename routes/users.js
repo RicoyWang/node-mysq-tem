@@ -1,27 +1,26 @@
 var express = require('express');
 var router  = express.Router();
 var URL     = require('url');
-
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
-
-router.get('/getUserInfo',function(req,res,next){
-    var user = {};
-    var params = URL.parse(req.url,true).query;
-    if(params.id == '1'){
-        user.name = 'ligh';
-        user.age = '1';
-        user.city = '北京';
-    }else{
-        user.name = "SPT";
-        user.age = '2';
-        user.city = '杭州';
-    }
-    var response = {status:1,data:user};
+var router = require('express').Router();
+var UserInfoAPI = require('../model/UserInfo.js')
+ 
+router.route('/')
+    // 顯示登入表單 (GET http://localhost:3000/login)
+    .get(function(req,res){
+        var userInfoObj = {}
+        userInfoObj= {
+            user_id : 'wx_dfae121932',
+            name : '王小草',
+        }
+        UserInfoAPI.findBySome(userInfoObj).then(function(userinfo) {
+            res.send('姓名 :' + userinfo.dataValues.name);
+        }).catch(function(er){
+            console.log('er')
+        });
+    })
+    // 處理登入表單 (POST http://localhost:3000/login)
+    .post(function(req,res,next){
     
-    res.send(JSON.stringify(response))
-})
+    })
+
 module.exports = router;

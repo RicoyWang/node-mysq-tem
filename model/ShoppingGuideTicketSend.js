@@ -2,11 +2,9 @@ var Sequelize = require('sequelize');
 var sequelize = require('../db/sequelizeDB/sequelizeConfig.js');
 var ShoppingGuideTicketSendAPI ={}
 var ShoppingGuideTicketSendModel = sequelize.define('ShoppingGuideTicketSends', {
-    //是否屏蔽
     user_id: {
         type: Sequelize.STRING
     },
-    //是否默认
     product_id: {
         type: Sequelize.STRING
     },
@@ -16,10 +14,6 @@ var ShoppingGuideTicketSendModel = sequelize.define('ShoppingGuideTicketSends', 
     Pid:{
         type: Sequelize.TEXT
     },
-    //创建时间
-    create_at: {
-        type: Sequelize.DATE
-    }
 }, {
     freezeTableName: false
 });
@@ -27,22 +21,25 @@ var ShoppingGuideTicketSendModel = sequelize.define('ShoppingGuideTicketSends', 
 var ShoppingGuideTicketSend = ShoppingGuideTicketSendModel.sync({force: false});
 
 //创建
-ShoppingGuideTicketSendAPI.NewLever =function(up_id, down_id){
-    console.log(ShoppingGuideTicketSend)
+ShoppingGuideTicketSendAPI.NewPID =function(taobao_account, promotion_name){
     return ShoppingGuideTicketSendModel.create({
-        up_id: up_id,
-        down_id:down_id,
+        taobao_account: taobao_account,
+        promotion_name:promotion_name,
         create_at: Date.now()
     })
 }
-// 查找所以文章
+// 查找所以
 ShoppingGuideTicketSendAPI.findAllPosts = function() {
     return ShoppingGuideTicketSendModel.findAll();
 };
 
-// 通过 ID 查找文章
+// 通过 ID 查找
 ShoppingGuideTicketSendAPI.findById = function(id) {
-    return ShoppingGuideTicketSendModel.findById(id);
+    return ShoppingGuideTicketSendModel.findOne({ where: { id: id } });
+};
+//淘宝账号
+ShoppingGuideTicketSendAPI.findByAccount = function(taobao_account) {
+    return ShoppingGuideTicketSendModel.findOne({ where: { taobao_account: taobao_account } });
 };
 
 module.exports = ShoppingGuideTicketSendAPI
