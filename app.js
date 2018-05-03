@@ -43,6 +43,7 @@ app.use('http://127.0.0.1:3000/', proxy('www.baidu.com'));
 app.use('/', index);
 app.use('/404', error);
 app.use('/login', login);
+console.log('********************************');
 app.use('/users', users);
 app.use('/robot', robot);
 app.use('/fanli', fanli);
