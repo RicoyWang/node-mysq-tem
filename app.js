@@ -35,10 +35,10 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
-process.on('uncaughtException', function(err) {
-  console.log('Caught exception: ' + err);
-  throw err;
-});
+// process.on('uncaughtException', function(err) {
+//   console.log('Caught exception: ' + err);
+//   throw err;
+// });
 app.use('http://127.0.0.1:3000/', proxy('www.baidu.com'));
 app.use('/', index);
 app.use('/404', error);

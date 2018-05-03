@@ -1,7 +1,7 @@
-var config = require('../DBConfig.js').fanli;
-var Sequelize = require('sequelize');
+let ENV = require('../../env/env.js')
+let config = require('../DBConfig.js').fanli;
+let Sequelize = require('sequelize');
 
-var node_env = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
 
 //sequelize 实例
 module.exports   = new Sequelize(config.database, config.user, config.password,{
