@@ -1,3 +1,6 @@
+/**
+ * 该页面暂时无法生效，可能是受express本身的静态资源访问的影响
+ */
 var express = require('express');
 var router  = express.Router();
 var URL     = require('url');
