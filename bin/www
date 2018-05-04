@@ -25,7 +25,7 @@ io.set('origins', "http://127.0.0.1:3000");
 /**
  * Listen on provided port, on all network interfaces.
  */
-users=[];
+users=require('../socket/users.js');
 io.on('connection', customService(io));
 server.listen(port);
 server.on('error', onError);
