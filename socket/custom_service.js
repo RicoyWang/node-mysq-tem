@@ -23,7 +23,7 @@
                     users.push(nickname);
                     socket.emit('loginSuccess');
                     io.sockets.emit('system', nickname,users.length, 'login'); //向所有连接到服务器的客户端发送当前登陆用户的昵称 
-                };
+                }
             })
         }
         _socketLinsentOn_disconnect(){
@@ -52,10 +52,8 @@
     }
 function customService(io) {
     return function (socket) {
-
-        var soket = new SocketControl(socket,io)
+        let soket = new SocketControl(socket,io)
         soket._init()
-        
     }
   }
   module.exports  = customService
